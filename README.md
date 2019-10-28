@@ -1,6 +1,6 @@
 # LZFoo
 
-A rather simple encoding for [LZ77](https://en.wikipedia.org/wiki/LZ77_and_LZ78)-style compressed data. Data is represented as either a literal or as a backpointer to previously decompressed data - no [entropy encoding](https://en.wikipedia.org/wiki/Entropy_encoding) involved. This leads to simple (and thus fast) decompression, at the cost of not being able to achieve compression ratios competetive with e.g. [DEFLATE](https://en.wikipedia.org/wiki/DEFLATE) or [Zstandard](https://en.wikipedia.org/wiki/Zstandard) can achieve. LZFoo plays in the same league as [snappy](https://github.com/google/snappy) or [lz4](https://github.com/lz4/lz4). This spec merely describes an encoding for compressed data, *not* an algorithm for performing the compression.
+A rather simple encoding for [LZ77](https://en.wikipedia.org/wiki/LZ77_and_LZ78)-style compressed data. Data is represented as either a literal or as a backpointer to previously decompressed data - no [entropy encoding](https://en.wikipedia.org/wiki/Entropy_encoding) involved. This leads to simple (and thus fast) decompression, at the cost of not being able to achieve compression ratios competetive with what e.g. [DEFLATE](https://en.wikipedia.org/wiki/DEFLATE) or [Zstandard](https://en.wikipedia.org/wiki/Zstandard) can achieve. LZFoo plays in the same league as [snappy](https://github.com/google/snappy) or [lz4](https://github.com/lz4/lz4). This spec merely describes an encoding for compressed data, *not* an algorithm for performing the compression.
 
 **Status: Pending stabilization, will be stabilized on 01/04/2020, any further changes will then be released as a new format.**
 
@@ -34,4 +34,4 @@ A copy instruction starts with a byte whose most-significant bit is one (a numbe
 
 ## Is This Really Needed?
 
-Probably not. But snappy's format is fairly restricted (can copy at most 64 bytes with a single backreference), the LZ4 format uses a really weird varint, and both encode integers in little-endian rather than network byte order. The endianess was the main reason for defining yet another encoding, layering different protocols with different endianess criteria seemed weird.
+Probably not. But snappy's format is fairly restrictive (can only copy at most 64 bytes with a single backreference), the LZ4 format uses a really weird varint, and both encode integers in little-endian rather than network byte order. The endianess was the main reason for defining yet another encoding, layering different protocols with different endianess criteria seemed weird.
